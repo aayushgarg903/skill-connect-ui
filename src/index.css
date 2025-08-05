@@ -2,39 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* DiReHire Marketplace Design System - Professional Service Platform Colors */
 
 @layer base {
   :root {
+    /* Background & Surface */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 222 84% 5%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 222 84% 5%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 84% 5%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors - Professional Blue & Orange */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 91% 70%;
+    
+    --secondary: 210 11% 97%;
+    --secondary-foreground: 222 84% 5%;
+    
+    /* Service Categories */
+    --service-carpenter: 30 100% 50%;
+    --service-plumber: 200 100% 50%;
+    --service-electrician: 45 100% 50%;
+    --service-cleaner: 120 100% 40%;
+    
+    /* Status Colors */
+    --success: 120 100% 40%;
+    --warning: 45 100% 50%;
+    --error: 0 84% 60%;
+    
+    /* Neutral Grays */
+    --muted: 210 11% 97%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 11% 97%;
+    --accent-foreground: 222 84% 5%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Design System Extensions */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60% / 0.9), hsl(30 100% 50% / 0.9));
+    --shadow-card: 0 4px 16px hsl(217 91% 60% / 0.1);
+    --shadow-elevated: 0 8px 32px hsl(217 91% 60% / 0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --radius: 0.75rem;
 
     --radius: 0.5rem;
 
