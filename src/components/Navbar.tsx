@@ -18,24 +18,24 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
-              Home
+            <a href="/" className="text-foreground hover:text-primary transition-colors font-medium">
+              मुख्य पृष्ठ
             </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
-              Booth
+            <a href="/booth" className="text-foreground hover:text-primary transition-colors font-medium">
+              बूथ
             </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
-              Support
+            <a href="/support" className="text-foreground hover:text-primary transition-colors font-medium">
+              सहायता
             </a>
           </div>
 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="lg">
-              Find Workers
+            <Button variant="outline" size="lg" onClick={() => window.location.href = '/auth?type=customer'}>
+              श्रमिक खोजें
             </Button>
-            <Button variant="hero" size="lg">
-              Join as Worker
+            <Button variant="hero" size="lg" onClick={() => window.location.href = '/auth?type=worker'}>
+              श्रमिक के रूप में जुड़ें
             </Button>
           </div>
 
