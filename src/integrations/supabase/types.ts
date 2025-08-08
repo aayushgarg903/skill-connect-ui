@@ -14,7 +14,343 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      job_applications: {
+        Row: {
+          created_at: string
+          estimated_duration: number | null
+          id: string
+          job_id: string
+          message: string | null
+          proposed_price: number | null
+          status: Database["public"]["Enums"]["application_status"]
+          worker_id: string
+        }
+        Insert: {
+          created_at?: string
+          estimated_duration?: number | null
+          id?: string
+          job_id: string
+          message?: string | null
+          proposed_price?: number | null
+          status?: Database["public"]["Enums"]["application_status"]
+          worker_id: string
+        }
+        Update: {
+          created_at?: string
+          estimated_duration?: number | null
+          id?: string
+          job_id?: string
+          message?: string | null
+          proposed_price?: number | null
+          status?: Database["public"]["Enums"]["application_status"]
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "job_applications_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "worker_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          agreed_price: number | null
+          created_at: string
+          customer_id: string
+          description: string
+          estimated_duration: number | null
+          id: string
+          job_images: string[] | null
+          location: string
+          preferred_date: string | null
+          service_id: string
+          status: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at: string
+          urgency_level: Database["public"]["Enums"]["urgency_level"]
+          worker_id: string | null
+        }
+        Insert: {
+          agreed_price?: number | null
+          created_at?: string
+          customer_id: string
+          description: string
+          estimated_duration?: number | null
+          id?: string
+          job_images?: string[] | null
+          location: string
+          preferred_date?: string | null
+          service_id: string
+          status?: Database["public"]["Enums"]["job_status"]
+          title: string
+          updated_at?: string
+          urgency_level?: Database["public"]["Enums"]["urgency_level"]
+          worker_id?: string | null
+        }
+        Update: {
+          agreed_price?: number | null
+          created_at?: string
+          customer_id?: string
+          description?: string
+          estimated_duration?: number | null
+          id?: string
+          job_images?: string[] | null
+          location?: string
+          preferred_date?: string | null
+          service_id?: string
+          status?: Database["public"]["Enums"]["job_status"]
+          title?: string
+          updated_at?: string
+          urgency_level?: Database["public"]["Enums"]["urgency_level"]
+          worker_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "jobs_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "worker_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          job_id: string
+          rating: number
+          reviewee_id: string
+          reviewer_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          job_id: string
+          rating: number
+          reviewee_id: string
+          reviewer_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string
+          rating?: number
+          reviewee_id?: string
+          reviewer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: true
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_reviewee_id_fkey"
+            columns: ["reviewee_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          icon_url: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          icon_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      worker_profiles: {
+        Row: {
+          bio: string | null
+          created_at: string
+          experience_years: number | null
+          hourly_rate: number | null
+          id: string
+          is_available: boolean | null
+          is_verified: boolean | null
+          location: string
+          portfolio_images: string[] | null
+          rating: number | null
+          service_area: string[] | null
+          skills: string[] | null
+          total_jobs: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          experience_years?: number | null
+          hourly_rate?: number | null
+          id?: string
+          is_available?: boolean | null
+          is_verified?: boolean | null
+          location: string
+          portfolio_images?: string[] | null
+          rating?: number | null
+          service_area?: string[] | null
+          skills?: string[] | null
+          total_jobs?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          experience_years?: number | null
+          hourly_rate?: number | null
+          id?: string
+          is_available?: boolean | null
+          is_verified?: boolean | null
+          location?: string
+          portfolio_images?: string[] | null
+          rating?: number | null
+          service_area?: string[] | null
+          skills?: string[] | null
+          total_jobs?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "worker_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      worker_services: {
+        Row: {
+          created_at: string
+          experience_level: Database["public"]["Enums"]["experience_level"]
+          id: string
+          service_id: string
+          worker_id: string
+        }
+        Insert: {
+          created_at?: string
+          experience_level?: Database["public"]["Enums"]["experience_level"]
+          id?: string
+          service_id: string
+          worker_id: string
+        }
+        Update: {
+          created_at?: string
+          experience_level?: Database["public"]["Enums"]["experience_level"]
+          id?: string
+          service_id?: string
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "worker_services_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "worker_services_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "worker_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +359,16 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      application_status: "pending" | "accepted" | "rejected"
+      experience_level: "beginner" | "intermediate" | "expert"
+      job_status:
+        | "pending"
+        | "accepted"
+        | "in_progress"
+        | "completed"
+        | "cancelled"
+      urgency_level: "same_day" | "within_week" | "flexible"
+      user_role: "customer" | "worker" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +495,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      application_status: ["pending", "accepted", "rejected"],
+      experience_level: ["beginner", "intermediate", "expert"],
+      job_status: [
+        "pending",
+        "accepted",
+        "in_progress",
+        "completed",
+        "cancelled",
+      ],
+      urgency_level: ["same_day", "within_week", "flexible"],
+      user_role: ["customer", "worker", "admin"],
+    },
   },
 } as const
