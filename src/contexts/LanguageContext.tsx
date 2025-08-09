@@ -264,7 +264,7 @@ const translations = {
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<'hi' | 'en'>('hi'); // Default to Hindi
+  const [language, setLanguageState] = useState<'hi' | 'en'>('en'); // Default to English
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as 'hi' | 'en';

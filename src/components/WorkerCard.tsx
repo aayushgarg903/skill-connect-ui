@@ -4,6 +4,9 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star, MapPin, Clock, Shield, Eye, Heart } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface Worker {
   id: string;
@@ -30,6 +33,9 @@ interface WorkerCardProps {
 
 export const WorkerCard = ({ worker }: WorkerCardProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { t } = useLanguage();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const generateAvatar = (name: string) => {
     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
@@ -102,16 +108,16 @@ export const WorkerCard = ({ worker }: WorkerCardProps) => {
                   ))}
                 </div>
                 <span className="font-medium">{worker.rating}</span>
-                <span className="text-muted-foreground text-sm ml-1">
-                  ({worker.reviewCount} reviews)
-                </span>
+                 <span className="text-muted-foreground text-sm ml-1">
+                   ({worker.reviewCount} {t('workers.reviews')})
+                 </span>
               </div>
             </div>
             
-            <div className="flex items-center text-sm text-muted-foreground">
-              <Clock className="h-4 w-4 mr-1" />
-              {worker.completedJobs} jobs completed
-            </div>
+             <div className="flex items-center text-sm text-muted-foreground">
+               <Clock className="h-4 w-4 mr-1" />
+               {worker.completedJobs} {t('workers.completedJobs')}
+             </div>
           </div>
 
           {/* Availability and Pricing */}
@@ -120,23 +126,23 @@ export const WorkerCard = ({ worker }: WorkerCardProps) => {
               <div className={`h-2 w-2 rounded-full mr-2 ${
                 worker.isAvailable ? 'bg-success' : 'bg-error'
               }`} />
-              <span className={`text-sm font-medium ${
-                worker.isAvailable ? 'text-success' : 'text-error'
-              }`}>
-                {worker.isAvailable ? 'Available Today' : 'Busy'}
-              </span>
+               <span className={`text-sm font-medium ${
+                 worker.isAvailable ? 'text-success' : 'text-error'
+               }`}>
+                 {worker.isAvailable ? t('workers.available') : t('workers.unavailable')}
+               </span>
             </div>
             
-            <div className="text-right">
-              <div className="font-bold text-lg text-foreground">
-                ${worker.hourlyRate}/hr
-              </div>
-              {worker.projectRate && (
-                <div className="text-sm text-muted-foreground">
-                  ${worker.projectRate} project rate
-                </div>
-              )}
-            </div>
+             <div className="text-right">
+               <div className="font-bold text-lg text-foreground">
+                 ₹{worker.hourlyRate}/{t('workers.hourlyRate')}
+               </div>
+               {worker.projectRate && (
+                 <div className="text-sm text-muted-foreground">
+                   ₹{worker.projectRate} {t('workers.projectRate')}
+                 </div>
+               )}
+             </div>
           </div>
 
           {/* Skills */}
@@ -173,12 +179,27 @@ export const WorkerCard = ({ worker }: WorkerCardProps) => {
 
           {/* Action Buttons */}
           <div className="flex space-x-3">
-            <Button variant="outline" className="flex-1">
+            <Button 
+              variant="outline" 
+              className="flex-1"
+              onClick={() => navigate(`/worker/${worker.id}`)}
+            >
               <Eye className="h-4 w-4 mr-2" />
-              View Profile
+              {t('workers.viewProfile')}
             </Button>
-            <Button variant="default" className="flex-1">
-              Hire Now
+            <Button 
+              variant="default" 
+              className="flex-1"
+              onClick={() => {
+                if (!user) {
+                  navigate('/auth?type=customer');
+                } else {
+                  // Handle hire logic
+                  console.log('Hiring worker:', worker.id);
+                }
+              }}
+            >
+              {t('workers.hireNow')}
             </Button>
           </div>
         </div>
