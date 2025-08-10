@@ -17,7 +17,8 @@ const Auth = () => {
   const { t, language, setLanguage } = useLanguage();
   const { toast } = useToast();
   
-  const userType = (searchParams.get('type') as 'customer' | 'worker') || 'customer';
+  const typeParam = searchParams.get('type');
+  const userType = typeParam === 'worker' ? 'worker' as const : 'customer' as const;
   const [mode, setMode] = useState<'login' | 'signup' | 'otp'>('signup');
   const [formData, setFormData] = useState({
     email: '',
@@ -85,7 +86,7 @@ const Auth = () => {
       }
       
       // For customers, proceed directly
-      const userData = {
+      const userData: any = {
         full_name: `${formData.firstName} ${formData.lastName}`,
         first_name: formData.firstName,
         last_name: formData.lastName,
@@ -93,11 +94,13 @@ const Auth = () => {
         location: formData.location,
         role: userType,
         language_preference: formData.languagePreference,
-        ...(userType === 'worker' && {
-          pincode: formData.pincode,
-          aadhar_number: formData.aadharNumber,
-        }),
       };
+
+      // Add worker-specific fields if userType is worker
+      if (typeParam === 'worker') {
+        userData.pincode = formData.pincode;
+        userData.aadhar_number = formData.aadharNumber;
+      }
 
       const { error } = await signUp(formData.email, formData.password, userData);
       if (error) {
