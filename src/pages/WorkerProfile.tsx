@@ -263,7 +263,7 @@ const WorkerProfile = () => {
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="overview">{t('common.overview') || 'Overview'}</TabsTrigger>
             <TabsTrigger value="portfolio">{t('profile.portfolio')}</TabsTrigger>
             <TabsTrigger value="reviews">{t('workers.reviews')}</TabsTrigger>
             <TabsTrigger value="contact">{t('profile.contactInfo')}</TabsTrigger>

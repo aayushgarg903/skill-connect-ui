@@ -118,6 +118,7 @@ const translations = {
     'common.next': 'आगे',
     'common.previous': 'पिछला',
     'common.submit': 'प्रस्तुत करें',
+    'common.overview': 'विवरण',
     
     // Urgency levels
     'urgency.sameDay': 'आज ही',
@@ -240,6 +241,7 @@ const translations = {
     'common.next': 'Next',
     'common.previous': 'Previous',
     'common.submit': 'Submit',
+    'common.overview': 'Overview',
     
     // Urgency levels
     'urgency.sameDay': 'Same Day',

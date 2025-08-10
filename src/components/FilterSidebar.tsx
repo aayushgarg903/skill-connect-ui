@@ -12,7 +12,6 @@ export const FilterSidebar = () => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
-  const [selectedWorkType, setSelectedWorkType] = useState<string[]>([]);
 
   const services = [
     'services.carpenter', 'services.plumber', 'services.electrician', 'services.painter', 'services.mason',
@@ -21,7 +20,6 @@ export const FilterSidebar = () => {
 
   const experienceLevels = ['filters.beginner', 'filters.intermediate', 'filters.expert'];
   const availability = ['filters.today', 'filters.thisWeek', 'filters.flexible'];
-  const workTypes = ['filters.onsite', 'filters.remote'];
 
 
   const handleFilterToggle = (
@@ -40,12 +38,11 @@ export const FilterSidebar = () => {
     setSelectedServices([]);
     setSelectedExperience([]);
     setSelectedAvailability([]);
-    setSelectedWorkType([]);
   };
 
   const getActiveFilterCount = () => {
     return selectedServices.length + selectedExperience.length + 
-           selectedAvailability.length + selectedWorkType.length;
+           selectedAvailability.length;
   };
 
   return (
@@ -147,29 +144,6 @@ export const FilterSidebar = () => {
           </div>
         </div>
 
-        <Separator />
-
-        {/* Work Type */}
-        <div>
-          <h3 className="font-medium mb-3">{t('filters.workPreference')}</h3>
-          <div className="space-y-2">
-            {workTypes.map((type) => (
-              <div key={type} className="flex items-center space-x-2">
-                <Checkbox
-                  id={`worktype-${type}`}
-                  checked={selectedWorkType.includes(type)}
-                  onCheckedChange={() => handleFilterToggle(type, selectedWorkType, setSelectedWorkType)}
-                />
-                <label
-                  htmlFor={`worktype-${type}`}
-                  className="text-sm cursor-pointer"
-                >
-                  {t(type)}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
       </CardContent>
     </Card>
   );

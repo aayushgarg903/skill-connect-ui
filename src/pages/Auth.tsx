@@ -17,7 +17,7 @@ const Auth = () => {
   const { t, language, setLanguage } = useLanguage();
   const { toast } = useToast();
   
-  const userType = searchParams.get('type') as 'customer' | 'worker' || 'customer';
+  const userType = (searchParams.get('type') as 'customer' | 'worker') || 'customer';
   const [mode, setMode] = useState<'login' | 'signup' | 'otp'>('signup');
   const [formData, setFormData] = useState({
     email: '',
@@ -93,10 +93,10 @@ const Auth = () => {
         location: formData.location,
         role: userType,
         language_preference: formData.languagePreference,
-        ...(userType === 'worker' ? {
+        ...(userType === 'worker' && {
           pincode: formData.pincode,
           aadhar_number: formData.aadharNumber,
-        } : {}),
+        }),
       };
 
       const { error } = await signUp(formData.email, formData.password, userData);
